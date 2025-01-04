@@ -1,0 +1,29 @@
+We can create a Redux store using the Redux Toolkit configureStore API
+- configureStore accepts a reducer function as a named argument
+- configureStore automatically sets up the store with good default settings
+
+Redux logic is typically organized into files called "slices"
+- A "slice" contains the reducer logic and actions related to a specific feature / section of the Redux state
+- Redux Toolkit's createSlice API generates action creators and action types for each individual reducer function you provide
+
+Redux reducers must follow specific rules
+- Should only calculate a new state value based on the state and action arguments
+- Must make immutable updates by copying the existing state
+- Cannot contain any asynchronous logic or other "side effects"
+- Redux Toolkit's createSlice API uses Immer to allow "mutating" immutable updates
+* by adding a reducer parameter, we tell the store to use this slice reducer function to handle all updates to that state.
+
+Reading values from the state is done with functions called "selectors"
+- Selectors accept (state: RootState) as their argument and either return a value from the state, or derive a new value
+- Selectors can be written in slice files, or inline in the useSelector hook
+
+Async logic is typically written in special functions called "thunks"
+- Thunks receive dispatch and getState as arguments
+- Redux Toolkit enables the redux-thunk middleware by default
+
+React-Redux allows React components to interact with a Redux store
+- Wrapping the app with <Provider store={store}> enables all components to use the store
+- The `useSelector` hook lets React components read values from the Redux store
+- The `useDispatch` hook lets components dispatch actions
+- For TS usage, we create pre-typed useAppSelector and useAppDispatch hooks
+- Global state should go in the Redux store, local state should stay in React components
